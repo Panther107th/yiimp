@@ -94,7 +94,9 @@ function showPageHeader()
 	showItemHeader(controller()->id=='site'&&($action=='index' || $action=='wallet') && $ad, "/?address=$wallet", 'Wallet');
 	showItemHeader(controller()->id=='stats', '/stats', 'Graphs');
 	showItemHeader($action=='miners', '/site/miners', 'Miners');
-	showItemHeader(controller()->id=='api', '/site/api', 'API');
+	if (YIIMP_PUBLIC_API)
+		showItemHeader(controller()->id=='api', '/site/api', 'API');
+	
 	if (YIIMP_PUBLIC_EXPLORER)
 		showItemHeader(controller()->id=='explorer', '/explorer', 'Explorers');
 
