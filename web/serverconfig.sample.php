@@ -23,6 +23,7 @@ define('YAAMP_PAYMENTS_FREQ', 3*60*60);
 define('YAAMP_PAYMENTS_MINI', 0.001);
 
 define('YAAMP_ALLOW_EXCHANGE', false);
+define('YIIMP_PUBLIC_API', false);
 define('YIIMP_PUBLIC_EXPLORER', true);
 define('YIIMP_PUBLIC_BENCHMARK', false);
 define('YIIMP_FIAT_ALTERNATIVE', 'EUR'); // USD is main
