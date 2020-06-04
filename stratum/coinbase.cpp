@@ -989,7 +989,39 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 		
 		bool started = json_get_bool(json_result, "masternode_payments_started");
 		if (masternode_enabled && masternode && started) {
-			if (json_is_array(masternode)) {
+			// ADD EXOSIS 
+			if (!strcmp(coind->symbol, "EXO")) {
+				for(int i = 0; i < masternode->u.array.length; i++) {
+			  		const char *payee = json_get_string(masternode->u.array.values[i], "payee");
+			  		json_int_t amount = json_get_int(masternode->u.array.values[i], "amount");
+			  		if (payee && amount) {
+			    			npayees++;
+			    			available -= amount;
+			    			base58_decode(payee, script_payee);
+			    			bool masternode_use_p2sh = (strcmp(coind->symbol, "MAC") == 0);
+			    			if(masternode_use_p2sh)
+			      				p2sh_pack_tx(coind, script_dests, amount, script_payee);
+			    			else
+			      				job_pack_tx(coind, script_dests, amount, script_payee);
+			  		}
+				}
+		      // ADD CRYPTROX 
+		      } else if (!strcmp(coind->symbol, "CXC")) {
+				for(int i = 0; i < masternode->u.array.length; i++) {
+			  		const char *payee = json_get_string(masternode->u.array.values[i], "payee");
+			  		json_int_t amount = json_get_int(masternode->u.array.values[i], "amount");
+			  		if (payee && amount) {
+			    			npayees++;
+			    			available -= amount;
+			    			base58_decode(payee, script_payee);
+			    			bool masternode_use_p2sh = (strcmp(coind->symbol, "MAC") == 0);
+			    		if(masternode_use_p2sh)
+			      			p2sh_pack_tx(coind, script_dests, amount, script_payee);
+			    		else
+			      			job_pack_tx(coind, script_dests, amount, script_payee);
+			  		}
+				}
+			} else if (json_is_array(masternode)) {
 				for(int i = 0; i < masternode->u.array.length; i++) {
 					const char *payee = json_get_string(masternode->u.array.values[i], "payee");
 					const char *script = json_get_string(masternode->u.array.values[i], "script");
@@ -999,7 +1031,7 @@ void coinbase_create(YAAMP_COIND *coind, YAAMP_JOB_TEMPLATE *templ, json_value *
 						npayees++;
 						available -= amount;
 						script_pack_tx(coind, script_dests, amount, script);
-						} else if (payee) {
+					} else if (payee) {
 						npayees++;
 						available -= amount;
 						base58_decode(payee, script_payee);
