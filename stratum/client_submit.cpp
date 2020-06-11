@@ -69,7 +69,7 @@ void build_submit_values_res(YAAMP_JOB_VALUES *submitvalues, YAAMP_JOB_TEMPLATE 
     sprintf(submitvalues->coinbase, "%s", templ->coinbase);
 	int coinbase_len = strlen(submitvalues->coinbase);
 	//std::cerr << "coinbase[" << coinbase_len << "] = " << submitvalues->coinbase << std::endl;
-	std::cerr << "[2] Txes count: " << templ->txdata.size() << std::endl;
+	//std::cerr << "[2] Txes count: " << templ->txdata.size() << std::endl;
 
 	unsigned char coinbase_bin[1024];
 	memset(coinbase_bin, 0, 1024);
