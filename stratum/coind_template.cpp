@@ -462,7 +462,7 @@ YAAMP_JOB_TEMPLATE *coind_create_template(YAAMP_COIND *coind)
 		}
 	}
 	
-	std::cerr << "[1] Txes count: " << templ->txdata.size() << std::endl;
+	//std::cerr << "[1] Txes count: " << templ->txdata.size() << std::endl;
 	
     // for yespowerRES we need to insert coinbasetxn here
     if (!strcmp(g_stratum_algo, "yespowerRES")) {
